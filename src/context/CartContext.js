@@ -1,63 +1,42 @@
-import {createContext, useState} from "react";
+import { createContext, useState } from "react";
 
-export const CartContext = createContext();
+const Context = createContext()
 
-const CartCustomProvider = ({children}) =>{
-    const [cart,setCart] = useState([]);
-    const [total, setTotal] = useState(0);
-
-    const cartIndicator = cart.reduce((acum, e ) => acum += e.quantity, 0);
-
-    const addItemToCart = ( element, value)=>{
-        if(isInCart(element.objeto.id)){
-            if(element.objeto.available_quantity < value){
-            }
-            console.log('no se agrega al carrito')
-        }else{
-            setCart([...cart,{"item": element.objeto , "quantity":value}])
-        }        
+export const CartContextProvider = ({ children }) => {
+    const [cart, setCart] = useState([])
+    console.log(cart)
+    const addItem = (product, quantity) => {
+        const objItemCart = {
+            ...product,
+            quantity
+        }
+        
+        setCart([...cart, objItemCart ])
     }
 
-    const addOneItem = (id) => {
-        let index = cart.findIndex( el => el.item.id === id)
-        if(cart[index].quantity < cart[index].item.available_quantity){
-            cart[index].quantity += 1      
-            setCart([...cart])
-        }        
-    }
-
-    const substractOneItem = (id) => {
-        let index = cart.findIndex( el => el.item.id === id)
-        if(cart[index].quantity > 1){
-            cart[index].quantity -= 1      
-            setCart([...cart])
-        }        
-    }
-
-    const removeItem = (id)=>{
-        let newArray = cart.filter( el => el.item.id !== id);        
-        setCart(newArray)
-    }
-    
-    const clear = ()=>{
+    const clearCart = () => {
         setCart([])
     }
 
-    const isInCart = (id)=>{
-        let idItem = cart.find( el => el.item.id === id);
-        return idItem
-    }
-    
-   const getTotal = () => {
-        const totalCart = cart.reduce((acum,e)=> acum += e.item.price * e.quantity , 0);
-        setTotal(totalCart)
-   }
+    const getQuantity = () => {
+        let count = 0
+        cart.forEach(prod => {
+            count = count + prod.quantity
+        })
 
-    return(
-        <CartContext.Provider value={{cart, addItemToCart, removeItem, clear, total, getTotal, addOneItem,substractOneItem, cartIndicator}}>
+        return count
+    }
+
+    return (
+        <Context.Provider value={{ 
+            cart, 
+            addItem,
+            clearCart,
+            getQuantity
+        }}>
             {children}
-        </CartContext.Provider>
+        </Context.Provider>
     )
 }
 
-export default CartCustomProvider;
+export default Context
