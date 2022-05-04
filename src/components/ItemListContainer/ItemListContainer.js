@@ -1,10 +1,14 @@
-import React from 'react'
-import { useState, useEffect } from 'react'
+import './ItemListContainer.css'
+import { useState, 
+    useEffect 
+} from 'react'
 import ItemList from '../ItemList/ItemList'
-// import { getProducts } from '../../asyncmock'
-import { useParams } from 'react-router-dom'
-import { firestoreDb } from '../../services/firebase'
-import { getDocs, collection, query, where, limit } from 'firebase/firestore' 
+import { getProducts } from '../../asyncmock'
+// import { getProducts } from '../../services/firebase/firestore'
+import { Link, useParams } from 'react-router-dom'
+import { useAsync } from '../../hooks/useAsync'
+import { useNotification } from '../../notification/notification'
+
 
 const ItemListContainer = () => {
     const [products, setProducts] = useState([])
@@ -12,49 +16,49 @@ const ItemListContainer = () => {
 
     const { categoryId } = useParams()
 
+    const { setNotification } = useNotification()
 
-    useEffect(() => {
-        setLoading(true)
+    useAsync(
+        setLoading, 
+        () => getProducts(categoryId), 
+        setProducts, 
+        () => setNotification('error', 'Hubo un error al cargar los productos'), 
+        [categoryId]
+    )
+
+    // useEffect(() => {
+    //     setLoading(true)
         
-        // getProducts(categoryId).then(items => {
-        //     setProducts(items)
-        // }).catch(err  => {
-        //     console.log(err)
-        // }).finally(() => {
-        //     setLoading(false)
-        // })
+    //     getProducts(categoryId).then(items => {
+    //         setProducts(items)
+    //     }).catch(err  => {
+    //         console.log(err)
+    //     }).finally(() => {
+    //         setLoading(false)
+    //     })
+        
 
-        const collectionRef = categoryId
-        ? query(collection(firestoreDb, 'products'), where('category', '==', categoryId), limit(10))
-        : collection(firestoreDb, 'products')
+    //     return (() => {
+    //         // setProducts([])
+    //     })          
+    // }, [categoryId])
 
-        getDocs(collectionRef).then(querySnapshot => {
-            console.log(querySnapshot.size)
-            const products = querySnapshot.docs.map(doc => {
-                return { id: doc.id, ...doc.data() }
-            })
-            setProducts(products)
-        }).catch(error => {
-            console.log(error)
-        }).finally(() => {
-            setLoading(false)
-        })
-
-        return (() => {
-            setProducts([])
-        })          
-    }, [categoryId])
-
+    if(loading) {
+        return (
+            <>
+                <h1>Cargando...</h1>
+            </>
+        )
+    }
+    
+    if(products.length === 0) {
+        return <h1>No se encontraron productos!</h1>
+    }
     
     return (
-        <div className="ItemListContainer" onClick={() => console.log('Hice click en ItemListContainer')}>
-            {
-                loading ? 
-                    <h1>Cargando...</h1> :  
-                products.length > 0 ? 
-                    <ItemList products={products}/> : 
-                    <h1>No se encontraron productos!</h1>
-            }
+        <div className="ItemListContainer">
+            <Link to='/cart'>Cart</Link>
+            <ItemList products={products}/> 
         </div>
     )    
     

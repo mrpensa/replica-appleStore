@@ -8,25 +8,24 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { CartContextProvider } from './context/CartContext'
 import { NotificationProvider } from './notification/notification'
 
-
-function App() {
-  return (
-    <div className="App">
-      <NotificationProvider>
-        <CartContextProvider>          
-          <BrowserRouter>
-            <NavBar />
-            <Routes>
-              <Route path='/' element={<ItemListContainer greeting={'Hola Coder'}/>}/>
-              <Route path='/category/:categoryId' element={<ItemListContainer greeting={'Hola Coder'}/>} />
-              <Route path='/detail/:productId' element={<ItemDetailContainer />} />
-              <Route path='/cart' element={<Cart />} />
-            </Routes>
-          </BrowserRouter>
-        </CartContextProvider>
-        </NotificationProvider>
-    </div>
-  );
+const App = () => {
+    return (
+        <div className="App">
+            <NotificationProvider>
+                <CartContextProvider>          
+                    <BrowserRouter>
+                        <NavBar />
+                        <Routes>
+                            <Route path='/' element={<ItemListContainer greeting={'Hola Coder'}/>}/>
+                            <Route path='/category/:categoryId' element={<ItemListContainer greeting={'Hola Coder'}/>} />
+                            <Route path='/detail/:productId' element={<ItemDetailContainer />} />
+                            <Route path='/cart' element={<Cart />} />
+                        </Routes>
+                    </BrowserRouter>
+                </CartContextProvider>
+            </NotificationProvider>
+        </div>
+    );
 }
 
 //React.createElement('Avatar', { className: "Avatar" }, [])
