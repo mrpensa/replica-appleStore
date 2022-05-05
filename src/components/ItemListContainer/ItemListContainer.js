@@ -3,8 +3,7 @@ import { useState,
     useEffect 
 } from 'react'
 import ItemList from '../ItemList/ItemList'
-import { getProducts } from '../../asyncmock'
-// import { getProducts } from '../../services/firebase/firestore'
+import { getProducts } from '../../services/firebase/firestore'
 import { Link, useParams } from 'react-router-dom'
 import { useAsync } from '../../hooks/useAsync'
 import { useNotification } from '../../notification/notification'
@@ -26,22 +25,6 @@ const ItemListContainer = () => {
         [categoryId]
     )
 
-    // useEffect(() => {
-    //     setLoading(true)
-        
-    //     getProducts(categoryId).then(items => {
-    //         setProducts(items)
-    //     }).catch(err  => {
-    //         console.log(err)
-    //     }).finally(() => {
-    //         setLoading(false)
-    //     })
-        
-
-    //     return (() => {
-    //         // setProducts([])
-    //     })          
-    // }, [categoryId])
 
     if(loading) {
         return (
@@ -57,7 +40,7 @@ const ItemListContainer = () => {
     
     return (
         <div className="ItemListContainer">
-            <Link to='/cart'>Cart</Link>
+            {/* <Link to='/cart'>Cart</Link> */}
             <ItemList products={products}/> 
         </div>
     )    

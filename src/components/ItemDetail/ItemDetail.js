@@ -10,7 +10,6 @@ const ItemDetail = ({ id, name, img, category, description, price, stock}) => {
     const { setNotification } = useNotification()
 
     const handleOnAdd = (count) => {
-        console.log('agregue al carrito')
 
         addItem({ id, name, price}, count)
         setNotification('success', 'Se agregaron correctamente los productos al carrito')
