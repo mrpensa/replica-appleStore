@@ -40,6 +40,7 @@ const NavBar = () => {
           <div>
             { getQuantity() > 0 && <CartWidget /> }
           </div>
+        
         </nav>
     )
 }

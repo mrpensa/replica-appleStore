@@ -1,70 +1,26 @@
-# Getting Started with Create React App
+# Un poco de React.JS y Firebase
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+El proyecto lo podemos catalogar con la construccion de dos partes, firebase y React, uno funcionará como base de datos para almacenar nuestro sitio, en este caso un ecommerce, la otra parte será toda la parte visual y es la que estará en contacto con el cliente. 
 
-## Available Scripts
+Hablemos de React, el proytecto está dividido por carpetas, components, hooks, adapters y services. Los components son partes de código independientes y reutilizables, estos pueden manejar su propio estado y podemos combinar componentes para que haya una interfaz de usuario más completa, compleja y para mayor experiencia a nuestros futuros usuarios. Estos estados que poseen los componentes son representacion de un conjuntos de propiedades y valores en un momento determinado de ejecución, pudiendo manejar y actualizar su estado internamente, aunque estas van a morir y serán reiniciadas en cada render quedando a manos del garbage collector. Para esto están los Hooks, los cuales son funciones que nos permiten "conectarnos" a ciertas características del estado y del ciclo de vida los componentes.
 
-In the project directory, you can run:
+Para empezar a usar React.JS ejecutaremos un comando en la terminal, posicionandonos en la carpeta en la cual deseemos trabajar y ejecutar: npx create-react-app nombreDeLaApp, esto nos creará una serie de archivos y carpetas las cuales funcionarán como la base de nuestro poyecto e iremos conectado e integrando nuestros archivos y componentes en App.js, la cual es la raíz que nos proporciona React por defecto.
 
-### `npm start`
+Pasemos ahora a Firebase, este paso es más fácil, acá solo nos registramos a la página, creamos nuestra base de datos, instalamos mediante nuestra terminal: npm install firebase, y ya luego comienza a usar los SDK de los productos que quieres usar. Para mayor seguridad del proyecto, las credenciales de los datos de Firestore estarán ocultos y no serán subidos a github, cada proyecto debe contar con el suyo y mantener su respectiva seguridad.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**Tener en cuenta que para poder levantar el servidor se necesitará ejecutar: npm start situandonos al nivel de la carpeta que contenga los package.json.**
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+Ahora, tendremos que conectarnos con el DOM, esto gracias a ReactDOM, un paquete que proporciona métodos específicos de DOM que se pueden usar en el nivel superior de una aplicación web para permitir una forma eficiente de administrar los elementos DOM de la página web. Mientras React nos provee de métodos para crear los elementos que se van a renderizar en nuestro HTML, ReactDOM nos provee los métodos que nos permitirán llegar a un punto donde se encontrará nuestro código con nuestro HTML. Nuevamente tendremos que ejecutar en nuestra consola: npm install react-router-dom y ya estaremos listos para trabajar.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Uso de componentes
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* Cart: Confirmación de pedido y mensaje de salida al cliente para confirmar éxito de la carga de la orden a firebase.
+* CartItem: Parte visual del carrito, mostrará los items, cantidades y precios en forma detallada.
+* CartWidget: Imagen y contador del carrito en el navBar.
+* Item: Primera visualización del producto antes de entrar en más detalles.
+* ItemCount: Contador para elegir cantidad de los productos.
+* ItemDetail: Paso posterior al haber añadido el producto al carro de compras.
+* ItemDetailContainer: Pantalla de carga del sitio.
+* ItemList: Lista de poductos.
+* Carpeta Adapters: Permite ordenar la categoria y productos traidos desde firebase.
