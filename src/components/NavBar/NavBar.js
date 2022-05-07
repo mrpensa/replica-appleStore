@@ -23,7 +23,7 @@ const NavBar = () => {
     return (
         <nav className="NavBar" >
           <Link to='/'>
-              <h3>Ecommerce</h3>
+            <img className='logo' src='https://megatecnologia.com/img/cms/Apple-Logo.png' alt=''></img>
           </Link>
           <div className="Categories">
               {
