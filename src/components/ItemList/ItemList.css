@@ -1,3 +1,12 @@
 .ListGroup {
     display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.hero {
+    height: 50vh;
+    width: 100%;
+    margin: 50px 0px;
 }

@@ -5,7 +5,7 @@
     padding: 20px;
     margin: 30px;
     font-size: 10px;
-    background-color: papayawhip;
+    background-color: #6c757d;
     border: 1px solid #e1e1e1;
     border-radius: 10px;
 }
@@ -34,7 +34,7 @@
     width: auto;
     padding: 12px;
     font-size: 8px;
-    background: #8C30F5;
+    background: #6c757d;
     border-radius: 8px;
     flex: none;
     display: flex;
